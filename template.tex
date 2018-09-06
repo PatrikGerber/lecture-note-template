@@ -8,7 +8,8 @@
 \usepackage{enumerate}
 \usepackage{chngcntr}
 \usepackage{sectsty}
-% \usepackage{hyperref} % Uncommment to make references clickable
+\usepackage{xfrac}
+\usepackage{hyperref} % Uncommment to make references clickable
 \usepackage[a4paper,margin=1.5in,footskip=0.25in]{geometry}
 
 % Makes equation numbering based on section
@@ -18,11 +19,32 @@
 \allsectionsfont{\mdseries\scshape}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Defining environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{slimDefinitionStyle} % name
+    {\topsep}                    	  % Space above
+    {\topsep}                    	  % Space below
+    {}			                   	  % Body font
+    {}                           	  % Indent amount
+    {\mdseries\scshape}			  	  % Theorem head font
+    {.}                          	  % Punctuation after theorem head
+    {.5em}                       	  % Space after theorem head
+    {}  % Theorem head spec (can be left empty, meaning ‘normal’)
+\newtheoremstyle{slimTheoremStyle} 	% name
+    {\topsep}                    	% Space above
+    {\topsep}                    	% Space below
+    {\itshape}                   	% Body font
+    {}                           	% Indent amount
+    {\mdseries\scshape}			 	% Theorem head font
+    {.}                          	% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  % Theorem head spec (can be left empty, meaning ‘normal’)
+\theoremstyle{slimTheoremStyle} % Comment this to get boldface theorem headers
+
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 
-\theoremstyle{definition}
+% \theoremstyle{definition}
+\theoremstyle{slimDefinitionStyle}
 \newtheorem{definition}{Definition}[section]
 
 \theoremstyle{remark}
@@ -57,7 +79,7 @@
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\eqdef}{=\vcentcolon}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \begin{document}
 
 
