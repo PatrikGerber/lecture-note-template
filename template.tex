@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{sectsty}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -8,7 +9,6 @@
 \usepackage{bbm}
 \usepackage{enumerate}
 \usepackage{chngcntr}
-\usepackage{sectsty}
 \usepackage{yfonts}
 \usepackage{xfrac}
 \usepackage{stmaryrd}
@@ -25,9 +25,11 @@
 \counterwithin{equation}{section}
 
 % Changing the styling of section and subsection titles. Comment to get default styling
-\sectionfont{\centering\mdseries\scshape}
-\subsectionfont{\mdseries\scshape}
-\subsubsectionfont{\mdseries\scshape}
+\sectionfont{\centering\sffamily\color{blue}}
+\subsectionfont{\sffamily\color{blue}}
+\subsubsectionfont{\sffamily\color{blue}}
+
+% \subsubsectionfont{\mdseries\scshape}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Defining environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newtheoremstyle{slimDefinitionStyle} % name
@@ -104,6 +106,27 @@
 
 \begin{document}
 
+\section{Section name}
+\subsection{Subsection name}
+\subsubsection{Subsubsection name}
+
+\begin{theorem}[Theorem name]
+This is a theorem
+\end{theorem}
+
+\begin{lemma}
+This is a lemma
+\end{lemma}
+
+\begin{definition}
+This is a definition
+\end{definition}
+
+\begin{equation}\label{eqn}
+\sum\limits_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}. 
+\end{equation}
+
+This is a reference to equation (\ref{eqn}). 
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
