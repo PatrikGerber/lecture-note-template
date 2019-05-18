@@ -1,54 +1,71 @@
-\documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{sectsty}
+\usepackage[a4paper,margin=1.2in,footskip=0.25in]{geometry}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{bbm}
 \usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{float}
 \usepackage{chngcntr}
+\usepackage{sectsty}
 \usepackage{yfonts}
+\usepackage{url}
+\usepackage{wrapfig}
 \usepackage{xfrac}
 \usepackage{stmaryrd}
 \usepackage{hyperref} % Uncommment to make references clickable
-\usepackage[a4paper,margin=1.2in,footskip=0.25in]{geometry}
+\usepackage{tikz}
+% \usepackage{minted} % For including Python code
+\usepackage{tabularx}
+\usepackage{setspace}
+% This sets the line spacing
+\setstretch{1}
+% This sets the paragraph indent
+\setlength{\parindent}{0cm}
+
+% \definecolor{nice_blue}{RGB}{0,51,102}
+% \definecolor{nice_blue}{RGB}{73, 115, 171}
+% \definecolor{niceBlue}{RGB}{48, 99, 165}
+% \definecolor{nice_blue}{RGB}{61, 89, 171}
+% \definecolor{nice_blue}{RGB}{65, 105, 225}
+\definecolor{oxfordBlue}{RGB}{0, 33, 71}
 
 % Configuring style of references
 \hypersetup{
     colorlinks = True,
-    allcolors = blue    
+    allcolors = blue
 }
 
 % Makes equation numbering based on section
 \counterwithin{equation}{section}
 
 % Changing the styling of section and subsection titles. Comment to get default styling
-\sectionfont{\centering\sffamily\color{blue}}
-\subsectionfont{\sffamily\color{blue}}
-\subsubsectionfont{\sffamily\color{blue}}
-
-% \subsubsectionfont{\mdseries\scshape}
+\sectionfont{\centering\sffamily\scshape\color{black}}
+\subsectionfont{\sffamily\color{black}}
+\subsubsectionfont{\sffamily\color{black}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Defining environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newtheoremstyle{slimDefinitionStyle} % name
-    {\topsep}                         % Space above
-    {\topsep}                         % Space below
-    {}                                % Body font
-    {}                                % Indent amount
-    {\mdseries\scshape}               % Theorem head font
-    { ---}                            % Punctuation after theorem head
-    {.5em}                            % Space after theorem head
+    {\topsep}                    	  % Space above
+    {\topsep}                    	  % Space below
+    {}			                   	  % Body font
+    {}                           	  % Indent amount
+    {\mdseries\scshape}			  	  % Theorem head font
+    { ---}                         	  % Punctuation after theorem head
+    {.5em}                       	  % Space after theorem head
     {}  % Theorem head spec (can be left empty, meaning ‘normal’)
-\newtheoremstyle{slimTheoremStyle}  % name
-    {\topsep}                       % Space above
-    {\topsep}                       % Space below
-    {\itshape}                      % Body font
-    {}                              % Indent amount
-    {\mdseries\scshape}             % Theorem head font
-    { ---}                          % Punctuation after theorem head
-    {.5em}                          % Space after theorem head
+\newtheoremstyle{slimTheoremStyle} 	% name
+    {\topsep}                    	% Space above
+    {\topsep}                    	% Space below
+    {\itshape}                   	% Body font
+    {}                           	% Indent amount
+    {\mdseries\scshape}			 	% Theorem head font
+    { ---}                         	% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
     {}  % Theorem head spec (can be left empty, meaning ‘normal’)
 \theoremstyle{slimTheoremStyle} % Comment this to get boldface theorem headers
 
@@ -72,6 +89,8 @@
 \renewcommand{\cal}[1]{\mathcal{#1}}
 \newcommand{\bb}[1]{\mathbb{#1}}
 \renewcommand{\frak}[1]{\textfrak{#1}}
+\newcommand{\scr}[1]{\mathscr{#1}}
+
 
 % Common sets
 \newcommand{\R}{\mathbb{R}}
@@ -83,52 +102,53 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Ex}[1]{\mathbb{E}\left[ #1 \right]}
 \newcommand{\ExCond}[2]{\mathbb{E} \left[\left. #1 \right| #2 \right]}
+\newcommand{\KL}{D_{KL}\infdivx}
 
 % Probability
 \renewcommand{\P}{\mathbb{P}}
 \renewcommand{\Pr}[1]{\mathbb{P} \left( #1 \right)}
 \newcommand{\PrCond}[2]{\mathbb{P} \left( \left. #1 \right| #2 \right)}
 \newcommand{\Ind}{\mathbbm{1}}
+\newcommand{\Rad}{\operatorname*{Rad}}
 
 % Common distributions 
-\newcommand{\dNorm}[2]{\mathcal(N)\left( #1, #2 \right)}
+\newcommand{\dNorm}[2]{\mathcal{N}\left( #1, #2 \right)}
 \newcommand{\dExp}[1]{\text{Exp} \left( #1 \right)}
 \newcommand{\dBer}[1]{\text{Ber} \left( #1 \right)}
 \newcommand{\dPo}[1]{\text{Poisson} \left( #1 \right)}
+\newcommand{\dBin}[2]{\text{Binomial} \left( #1, #2 \right)}
+
 
 % Miscellaneous math stuff
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\eqdef}{=\vcentcolon}
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\DeclarePairedDelimiter\bbracket{\llbracket}{\rrbracket}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Dom}{\operatorname*{dom}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}     %   ceiling function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}   %   floor function
+\DeclarePairedDelimiter\bbracket{\llbracket}{\rrbracket}  % \bbracket{n, m} = [[n, m]]
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}
 
-\begin{document}
+% Circles its input. Usage: \circled{what you want int the circle}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
-\section{Section name}
-\subsection{Subsection name}
-\subsubsection{Subsubsection name}
 
-\begin{theorem}[Theorem name]
-This is a theorem
-\end{theorem}
+% This is the restriction operator, usage: \restr{f}{A} outputs f|_A 
+\DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
+  #1\;\delimsize\|\;#2%
+}
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
 
-\begin{lemma}
-This is a lemma
-\end{lemma}
-
-\begin{definition}
-This is a definition
-\end{definition}
-
-\begin{equation}\label{eqn}
-\sum\limits_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}. 
-\end{equation}
-
-This is a reference to equation (\ref{eqn}). 
-
-\bibliographystyle{plain}
-\bibliography{bibliography}
-
-\end{document}
+% \begin{document}
+% \section{Section}
+% \subsection{Subsection}
+% \subsubsetction{Subsubsection}
+% \begin{theorem}
+% Interesting theorem
+% \end{theorem}
+% \end{document}
